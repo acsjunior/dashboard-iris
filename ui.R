@@ -1,4 +1,4 @@
-library(shinydashboard) 
+library(shinydashboard)
 library(ggplot2)
 library(plotly)
 source("data.R")
@@ -16,38 +16,37 @@ ui <- dashboardPage(
   
   dashboardBody(
     tabItems(
-      tabItem(
-        tabName = "histogramas",
-        fluidRow(
-          box(width = 2,
-            selectInput("select_especie", label = "Selecione a espécie", 
-                        choices = especies, 
-                        selected = 1)),
-          
-          valueBoxOutput(width = 2, "value_observations"),
-          valueBoxOutput(width = 2, "value_sepal_len_mean"),
-          valueBoxOutput(width = 2, "value_sepal_wid_mean"),
-          valueBoxOutput(width = 2, "value_petal_len_mean"),
-          valueBoxOutput(width = 2, "value_petal_wid_mean")
-        ),
-        fluidRow(
-          box(width = 6,
-              plotlyOutput(outputId = "hist_sepal_len")),
-          box(width = 6,
-              plotlyOutput(outputId = "hist_sepal_wid")),
-          box(width = 6,
-              plotlyOutput(outputId = "hist_petal_len")),
-          box(width = 6,
-              plotlyOutput(outputId = "hist_petal_wid"))
-        )
+      tabItem(tabName = "histogramas",
+              fluidRow(
+                box(width = 2,
+                    selectInput(inputId = "select_specie", label = "Selecione a espécie", 
+                                choices = unique(df$Species), 
+                                selected = 1)),
+                valueBoxOutput(width = 2, outputId = "value_observations"),
+                valueBoxOutput(width = 2, outputId = "value_sepal_len_mean"),
+                valueBoxOutput(width = 2, outputId = "value_sepal_wid_mean"),
+                valueBoxOutput(width = 2, outputId = "value_petal_len_mean"),
+                valueBoxOutput(width = 2, outputId = "value_petal_wid_mean")
+              ),
+              fluidRow(
+                box(
+                  plotlyOutput(outputId = "hist_sepal_len")),
+                box(
+                  plotlyOutput(outputId = "hist_sepal_wid")),
+                box(
+                  plotlyOutput(outputId = "hist_petal_len")),
+                box(
+                  plotlyOutput(outputId = "hist_petal_wid"))
+                
+              )
       ),
       tabItem(
         tabName = "dispersao",
         fluidRow(
-          box(width = 6,
-              plotlyOutput(outputId = "scatter_1")),
-          box(width = 6,
-              plotlyOutput(outputId = "scatter_2"))
+          box(
+            plotlyOutput(outputId = "scatter_1")),
+          box(
+            plotlyOutput(outputId = "scatter_2"))
         )
       )
     )
